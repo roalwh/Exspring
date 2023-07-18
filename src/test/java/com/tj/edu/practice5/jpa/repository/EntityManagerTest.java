@@ -26,6 +26,7 @@ public class EntityManagerTest {
     @Test
     void entityManagerTest() {
         em.createQuery("select u from Member u").getResultList().forEach(s -> System.out.println(s));
+        em.createNativeQuery("select * from member");
     }
 
     @Test
@@ -75,35 +76,37 @@ public class EntityManagerTest {
 
     @Test
     @Transactional
-//    @Commit
+    @Commit
 //    @Rollback(false)
     void entityManagerTest3() {
         Users users = Users.builder()
                 .name("홍길동10")
-                .build();
-        usersRepository.save(users);
+                .build();   // 비영속성 상태
+//        usersRepository.save(users);
+        em.persist(users); // 영속성 상태
 
-//        em.persist(users); // 영속성 상태
-
-//        em.detach(users);  // 준영속성 상태
-//        em.clear();
+        em.detach(users);  // 준영속성 상태
+        users.setEmail("ho10@abc.com");
+//        em.flush(); // sql실행
+//
+////        em.clear();
 //        em.merge(users); // 준영속성 상태에서 영속성 상태로 변경
+//        users.setEmail("ho10----@abc.com");
 //        em.remove(users);    // 비영속성으로 삭제 상태
 
-//        usersRepository.findAll().forEach(System.out::println);
+        usersRepository.findAll().forEach(System.out::println);
 //        System.out.println(usersRepository.findByName("홍길동10").get(0));
     }
 
     @Test
-//    @Transactional
+    @Transactional
+    @Commit
     void persistCacheDelayInsertUpdateTest() {
-        Users user = usersRepository.findById(1L).get();
+        Users user = usersRepository.findById(1L).get();    // select, dirty check(변경감지)
         user.setName("이책상1");
+        usersRepository.save(user); // select, update
 
-        usersRepository.save(user); // update
-
-        user.setEmail("lee1@abc.com");
-
-        usersRepository.save(user); // update
+//        user.setEmail("lee1@abc.com");
+//        usersRepository.save(user); // select, update
     }
 }

@@ -56,7 +56,7 @@ public class Member extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private Nation nation;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER) // 즉시 로딩(eager), 지연 로딩(lazy)
     @JoinColumn(name = "member_id", insertable = false, updatable = false)
     @ToString.Exclude
     private List<MemberLogHistory> memberLogHistories;

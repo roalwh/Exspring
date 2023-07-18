@@ -1,5 +1,6 @@
 package com.tj.edu.practice5.jpa.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
@@ -20,8 +21,10 @@ import java.time.LocalDateTime;
 @EntityListeners(value = {AuditingEntityListener.class})
 public class BaseEntity {
     @CreatedDate
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createAt;
     @LastModifiedDate
+    @Column(nullable = false)
     private LocalDateTime updateAt;
     @CreatedBy
     private Long createBy;

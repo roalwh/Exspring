@@ -13,6 +13,13 @@ public class UsersServiceTest {
     private UsersService usersService;
     @Test
     void transactionTest1() {
-        usersService.put();
+        try {
+            usersService.put();
+
+            throw new Exception();
+        } catch (Exception e) {
+            System.out.println("오류다~~~~~");
+        }
+
     }
 }

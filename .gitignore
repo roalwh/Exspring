@@ -288,4 +288,11 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
-# End of https://www.toptal.com/developers/gitignore/api/intellij,eclipse,visualstudiocode,java,git,tortoisegit,maven,gradle
+# End of https://www.toptal.com/developers/gitignore/api/intellij,eclipse,visualstudiocode,java,git,tortoisegit,maven,gradle!/.idea/
+/.idea/.name
+/.idea/compiler.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/modules/practice1.main.iml
+/.idea/vcs.xml
